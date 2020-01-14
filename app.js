@@ -39,7 +39,9 @@ async function verifyToken(req, res, next) {
 }
 
 app.use("/general/account", require("./routes/1. general/1.1 login"));
-app.use("/general/user_info", verifyToken, require("./routes/1. general/1.2 user_info"));
+app.use("/user_info/general", verifyToken, require("./routes/2. user_info/2.1 general_info"));
+app.use("/health_data/disease", verifyToken, require("./routes/3. health_data/3.1 disease"));
+app.use("/health_data/allergen", verifyToken, require("./routes/3. health_data/3.2 allergen"));
 
 app.use(function (req, res, next) {
     console.log(`${req.method} -> ${req.originalUrl} is not a proper route!`);

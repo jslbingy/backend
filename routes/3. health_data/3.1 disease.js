@@ -5,16 +5,18 @@ const connection = require(`../../helpers/connection`);
 const query = require(`../../helpers/query`);
 const rb = require(`../../helpers/response_builder`)
 
-router.post(`/`, async function (req, res, next) {
+/**
+ * API 3.1.1 get all the diseases in db
+ */
+router.get(`/`, async function (req, res, next) {
     let con;
     try {
         con = await connection(dbConfig);
-        let body = { ...req.body };
-        let user = { ...req.user };
-
+        let result = await query(con, `select * from disease`, [user.id]);
+        res.json(rb.build(result, `retrieve disease info successfully`));
     } catch (err) {
         next(err);
     }
-});
+})
 
 module.exports = router;
