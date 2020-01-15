@@ -40,8 +40,13 @@ async function verifyToken(req, res, next) {
 
 app.use("/general/account", require("./routes/1. general/1.1 login"));
 app.use("/user_info/general", verifyToken, require("./routes/2. user_info/2.1 general_info"));
-app.use("/health_data/disease", verifyToken, require("./routes/3. health_data/3.1 disease"));
-app.use("/health_data/allergen", verifyToken, require("./routes/3. health_data/3.2 allergen"));
+app.use("/user_info/disease", verifyToken, require("./routes/2. user_info/2.2 disease_info"));
+app.use("/user_info/allergen", verifyToken, require("./routes/2. user_info/2.3 allergen_info"));
+app.use("/user_info/stroke", verifyToken, require("./routes/2. user_info/2.4 stroke_info"));
+app.use("/health_data/disease", require("./routes/3. health_data/3.1 disease"));
+app.use("/health_data/allergen", require("./routes/3. health_data/3.2 allergen"));
+app.use("/list", require("./routes/4. list/4.1 list"));
+
 
 app.use(function (req, res, next) {
     console.log(`${req.method} -> ${req.originalUrl} is not a proper route!`);
